@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Main Page</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background-color: #232545;
+		}
+		#FullPage{
+			position: fixed;
+			display: grid;
+			grid-template-columns: 20vw 50vw 30vw;
+		}
+		#LeftSide{
+			height: 100vh;
+			width: 20vw;
+			background-color: #393861;
+			margin: 0;
+			padding: 0;
+			grid-column: 1;
+		}
+		#TopPanel{
+			width: 50vw;
+			height: 40vh;
+			margin-left: 1vw;
+			margin-top: 2vh;
+			border-radius: 20px;
+			background-color: #393861;
+			grid-column: 2;
+		}
+		#RightPanel{
+			height: 80vh;
+			width: 28vw;
+			background-color: #393861;
+			grid-column: 3;
+			margin-right: 0;
+			margin-top: auto;
+			margin-bottom: auto;
+
+		}
+
+		.time{
+			color: white;
+			font-size: 50px;
+			margin-left: 5%;
+		}
+		#Circle{
+			background-color: white;
+			height: 8vh;
+			width: 8vh;
+			position: absolute;
+			top: 2%;
+			left: 2%;
+			border-radius: 50%;
+		}
+		#navigation{
+			position: absolute;
+			top: 20%;
+			left: 10%;
+			overflow: hidden;
+		}
+
+		.sidebar {
+			margin-left: 5vw;
+			padding: 0;
+			width: 15vw;
+			background-color: #393861;
+			position: absolute;
+			top: 20%;
+			text-align: center;
+			overflow: auto;
+			border-top-left-radius: 25px;
+			border-bottom-left-radius: 25px;
+		}
+
+		.sidebar a {
+			display: block;
+			color: white;
+			padding: 16px;
+			font-size: 20px;
+			text-decoration: none;
+			border-top-left-radius: 25px;
+			border-bottom-left-radius: 25px;
+		}
+
+		.sidebar a.active {
+			background-color: #232545;
+			color: white;
+			border-top-left-radius: 25px;
+			border-bottom-left-radius: 25px;
+		}
+
+		.sidebar a:hover:not(.active) {
+			background-color: #555;
+			color: white;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="FullPage" >
+		<div id="LeftSide">
+			<div id="Circle"></div>
+
+			<div class="sidebar">
+				<a class="active" href="#home">Dashboard</a>
+				<a href="{{ url_for('news') }}">News</a>
+				<a href="{{url_for('textToSpeech')}}">Text-To-Speech</a>
+				<a href="#about">About</a>
+			</div>
+		</div>
+
+		<div  id="TopPanel">
+			<h1 class="time" id="time"></h1>
+			<h1 class="time" id="time2"></h1>
+		</div>
+		<div id="RightPanel">
+
+		</div>
+	</div>
+	<script type="text/javascript">
+		let timeDisplay = document.getElementById("time");
+		let timeDisplay2 = document.getElementById("time2");
+		function updateClock() {
+			var now = new Date()
+
+			let options = {  
+				weekday: "long", year: "numeric", month: "short",  
+				day: "numeric"
+			};
+			let options2 = {
+				hour: "2-digit", minute: "2-digit" 
+			}
+			timeDisplay.innerHTML = now.toDateString("en-us", options);
+			timeDisplay2.innerHTML = now.toLocaleTimeString("en-us", options2);
+			setTimeout(updateClock, 1000);
+		}
+
+		updateClock(); 
+		// console.log(timeDisplay.innerHTML);
+		// var msg = new SpeechSynthesisUtterance(timeDisplay.innerHTML);
+		// speechSynthesis.speak(msg);
+
+	</script>
+</body>
+</html>
