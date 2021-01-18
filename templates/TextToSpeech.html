@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Main Page</title>
-
+	<link rel="stylesheet" type="text/css" href="../static/sideNav.css">
 	<style type="text/css">
 
 		*{
@@ -62,41 +62,6 @@
 			overflow: hidden;
 		}
 
-		.sidebar {
-			margin-left: 5vw;
-			padding: 0;
-			width: 15vw;
-			background-color: #393861;
-			position: absolute;
-			top: 20%;
-			text-align: center;
-			overflow: auto;
-			border-top-left-radius: 25px;
-			border-bottom-left-radius: 25px;
-		}
-
-		.sidebar a {
-			display: block;
-			color: white;
-			padding: 16px;
-			font-size: 20px;
-			text-decoration: none;
-			border-top-left-radius: 25px;
-			border-bottom-left-radius: 25px;
-		}
-
-		.sidebar a.active {
-			background-color: #232545;
-			color: white;
-			border-top-left-radius: 25px;
-			border-bottom-left-radius: 25px;
-		}
-
-		.sidebar a:hover:not(.active) {
-			background-color: #555;
-			color: white;
-		}
-
 	</style>
 </head>
 <body>
@@ -106,7 +71,7 @@
 
 			<div class="sidebar">
 				<a href="{{url_for('home')}}">Dashboard</a>
-				<a href="{{ url_for('news') }}">News</a>
+				<a href="{{ url_for('news', top='World') }}">News</a>
 				<a class="active" href="#">Text-To-Speech</a>
 				<a href="#about">About</a>
 			</div>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Main Page</title>
+		<link rel="stylesheet" type="text/css" href="../static/sideNav.css" />
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				background-color: #232545;
+			}
+			#FullPage {
+				position: fixed;
+				display: grid;
+				grid-template-columns: 20vw 67vw 13vw;
+			}
+			#LeftSide {
+				height: 100vh;
+				width: 20vw;
+				background-color: #393861;
+				margin: 0;
+				padding: 0;
+				grid-column: 1;
+			}
+
+			#Circle {
+				background-color: white;
+				height: 8vh;
+				width: 8vh;
+				position: absolute;
+				top: 2%;
+				left: 2%;
+				border-radius: 50%;
+			}
+			#Middle {
+				width: 80vw;
+				height: 100vh;
+				margin-left: 20vw;
+				/* background-color: white; */
+				position: absolute;
+				top: 0;
+				overflow-y: scroll;
+			}
+			/* Hide scrollbar for Chrome, Safari and Opera */
+			#Middle::-webkit-scrollbar {
+				display: none;
+			}
+
+			/* Hide scrollbar for IE, Edge and Firefox */
+			#Middle {
+				-ms-overflow-style: none; /* IE and Edge */
+				scrollbar-width: none; /* Firefox */
+			}
+
+			#MyJumbotron {
+				width: 75vw;
+				position: absolute;
+				height: 40vh;
+				border-radius: 3vh;
+				background-color: white;
+				background-size: 100% 100%;
+				position: relative;
+				top: 7vh;
+			}
+		</style>
+		{% block style %} {% endblock %}
+	</head>
+	<body>
+		<div id="FullPage">
+			<div id="LeftSide">
+				<div style="display: inline-block">
+					<div id="Circle"></div>
+					<div class="username2">{{username}}</div>
+				</div>
+
+				<div class="sidebar">
+					<a href="{{url_for('home')}}">Dashboard</a>
+					<a class="active" href="#">News</a>
+					<a href="{{url_for('textToSpeech')}}">Text-To-Speech</a>
+					<a href="#about">About</a>
+				</div>
+				<div id="Middle">
+					<center>
+						<div id="MyJumbotron"></div>
+					</center>
+
+					<nav>
+						<ul>
+							<li><div>{% block topics %} {% endblock %}</div></li>
+						</ul>
+					</nav>
+					<div>{% block actualNews %} {% endblock %}</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript"></script>
+	</body>
+</html>

@@ -1,150 +1,283 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Main Page</title>
-	<style type="text/css">
-		*{
-			margin: 0;
-			padding: 0;
-		}
-		body{
-			background-color: #232545;
-		}
-		#FullPage{
-			position: fixed;
-			display: grid;
-			grid-template-columns: 20vw 50vw 30vw;
-		}
-		#LeftSide{
-			height: 100vh;
-			width: 20vw;
-			background-color: #393861;
-			margin: 0;
-			padding: 0;
-			grid-column: 1;
-		}
-		#TopPanel{
-			width: 50vw;
-			height: 40vh;
-			margin-left: 1vw;
-			margin-top: 2vh;
-			border-radius: 20px;
-			background-color: #393861;
-			grid-column: 2;
-		}
-		#RightPanel{
-			height: 80vh;
-			width: 28vw;
-			background-color: #393861;
-			grid-column: 3;
-			margin-right: 0;
-			margin-top: auto;
-			margin-bottom: auto;
-
-		}
-
-		.time{
-			color: white;
-			font-size: 50px;
-			margin-left: 5%;
-		}
-		#Circle{
-			background-color: white;
-			height: 8vh;
-			width: 8vh;
-			position: absolute;
-			top: 2%;
-			left: 2%;
-			border-radius: 50%;
-		}
-		#navigation{
-			position: absolute;
-			top: 20%;
-			left: 10%;
-			overflow: hidden;
-		}
-
-		.sidebar {
-			margin-left: 5vw;
-			padding: 0;
-			width: 15vw;
-			background-color: #393861;
-			position: absolute;
-			top: 20%;
-			text-align: center;
-			overflow: auto;
-			border-top-left-radius: 25px;
-			border-bottom-left-radius: 25px;
-		}
-
-		.sidebar a {
-			display: block;
-			color: white;
-			padding: 16px;
-			font-size: 20px;
-			text-decoration: none;
-			border-top-left-radius: 25px;
-			border-bottom-left-radius: 25px;
-		}
-
-		.sidebar a.active {
-			background-color: #232545;
-			color: white;
-			border-top-left-radius: 25px;
-			border-bottom-left-radius: 25px;
-		}
-
-		.sidebar a:hover:not(.active) {
-			background-color: #555;
-			color: white;
-		}
-
-	</style>
-</head>
-<body>
-	<div id="FullPage" >
-		<div id="LeftSide">
-			<div id="Circle"></div>
-
-			<div class="sidebar">
-				<a class="active" href="#home">Dashboard</a>
-				<a href="{{ url_for('news') }}">News</a>
-				<a href="{{url_for('textToSpeech')}}">Text-To-Speech</a>
-				<a href="#about">About</a>
-			</div>
-		</div>
-
-		<div  id="TopPanel">
-			<h1 class="time" id="time"></h1>
-			<h1 class="time" id="time2"></h1>
-		</div>
-		<div id="RightPanel">
-
-		</div>
-	</div>
-	<script type="text/javascript">
-		let timeDisplay = document.getElementById("time");
-		let timeDisplay2 = document.getElementById("time2");
-		function updateClock() {
-			var now = new Date()
-
-			let options = {  
-				weekday: "long", year: "numeric", month: "short",  
-				day: "numeric"
-			};
-			let options2 = {
-				hour: "2-digit", minute: "2-digit" 
+	<head>
+		<title>Main Page</title>
+		<link rel="stylesheet" type="text/css" href="../static/sideNav.css" />
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
 			}
-			timeDisplay.innerHTML = now.toDateString("en-us", options);
-			timeDisplay2.innerHTML = now.toLocaleTimeString("en-us", options2);
-			setTimeout(updateClock, 1000);
-		}
+			body {
+				background-color: #232545;
+			}
+			#FullPage {
+				position: fixed;
+				display: grid;
+				grid-template-columns: 20vw 50vw 30vw;
+				grid-template-rows: 40vh 30vh 30vh;
+			}
+			#LeftSide {
+				height: 100vh;
+				width: 20vw;
+				background-color: #393861;
+				margin: 0;
+				padding: 0;
+				grid-column: 1;
+			}
+			#TopPanel {
+				width: 78vw;
+				height: 40vh;
+				margin-left: 1vw;
+				margin-top: 5vh;
+				border-radius: 20px;
+				background-color: #393861;
+				grid-column: 2;
+			}
+			#LogoContainer {
+				grid-column: 2;
+				grid-row: 2;
+				margin-left: 1vw;
+				margin-top: 10vh;
+				/*background-color: #393861;*/
+				width: 70vw;
+				height: 40vh;
+			}
+			#LogoContainer2 {
+				grid-column: 2;
+				grid-row: 3;
+				margin-left: 1vw;
+				margin-top: 2vh;
+				/*background-color: #393861;*/
+				width: 70vw;
+				height: 40vh;
+			}
+			#RightPanel {
+				height: 80vh;
+				width: 28vw;
+				background-color: #393861;
+				grid-column: 3;
+				margin-right: 0;
+				margin-top: auto;
+				margin-bottom: auto;
+			}
 
-		updateClock(); 
-		// console.log(timeDisplay.innerHTML);
-		// var msg = new SpeechSynthesisUtterance(timeDisplay.innerHTML);
-		// speechSynthesis.speak(msg);
+			.time {
+				color: white;
+				font-size: 50px;
+			}
 
-	</script>
-</body>
+			#Circle {
+				background-color: white;
+				height: 8vh;
+				width: 8vh;
+				position: absolute;
+				top: 2%;
+				left: 2%;
+				border-radius: 50%;
+				display: inline-block;
+			}
+			#navigation {
+				position: absolute;
+				top: 20%;
+				left: 10%;
+				overflow: hidden;
+			}
+
+			#timeContainer {
+				position: relative;
+				top: 50%;
+				left: 2%;
+			}
+			#google {
+				background: url("../static/logos/google.png") no-repeat;
+				background-size: 10vh 10vh;
+				background-position: center;
+				display: inline-block;
+				background-color: #393861;
+				width: 15vh;
+				height: 15vh;
+				border-radius: 25%;
+			}
+			#youtube {
+				background: url("../static/logos/youtube.png") no-repeat;
+				background-size: 10vh 10vh;
+				background-position: center;
+				display: inline-block;
+				background-color: #393861;
+				width: 15vh;
+				height: 15vh;
+				border-radius: 25%;
+				margin-left: 2%;
+			}
+			#reddit {
+				background: url("../static/logos/reddit.png") no-repeat;
+				background-size: 10vh 10vh;
+				background-position: center;
+				display: inline-block;
+				background-color: #393861;
+				width: 15vh;
+				height: 15vh;
+				border-radius: 25%;
+				margin-left: 2%;
+			}
+			#instagram {
+				background: url("../static/logos/instagram.png") no-repeat;
+				background-size: 10vh 10vh;
+				background-position: center;
+				display: inline-block;
+				background-color: #393861;
+				width: 15vh;
+				height: 15vh;
+				border-radius: 25%;
+				margin-left: 2%;
+			}
+			#twitter {
+				background: url("../static/logos/twitter.png") no-repeat;
+				background-size: 10vh 10vh;
+				background-position: center;
+				display: inline-block;
+				background-color: #393861;
+				width: 15vh;
+				height: 15vh;
+				border-radius: 25%;
+			}
+			#github {
+				background: url("../static/logos/github.png") no-repeat;
+				background-size: 10vh 10vh;
+				background-position: center;
+				display: inline-block;
+				background-color: #393861;
+				width: 15vh;
+				height: 15vh;
+				border-radius: 25%;
+				margin-left: 2%;
+			}
+			#linkedin {
+				background: url("../static/logos/linkedin.png") no-repeat;
+				background-size: 10vh 10vh;
+				background-position: center;
+				display: inline-block;
+				background-color: #393861;
+				width: 15vh;
+				height: 15vh;
+				border-radius: 25%;
+				margin-left: 2%;
+			}
+			#discord {
+				background: url("../static/logos/discord.png") no-repeat;
+				background-size: 10vh 10vh;
+				background-position: center;
+				display: inline-block;
+				background-color: #393861;
+				width: 15vh;
+				height: 15vh;
+				border-radius: 25%;
+				margin-left: 2%;
+			}
+
+			.wrapper {
+				text-align: center;
+			}
+			.wrapper h1 {
+				color: #fff;
+				font-size: 60px;
+				/*font-family: "ubuntu";*/
+				text-transform: uppercase;
+				font-weight: 700;
+				font-family: "Avenir", Avenir;
+				background: linear-gradient(
+					to right,
+					#095fab 10%,
+					#25abe8 50%,
+					#57d75b 60%
+				);
+				background-size: auto auto;
+				background-clip: border-box;
+				background-size: 200% auto;
+				color: #fff;
+				background-clip: text;
+				/* text-fill-color: transparent; */
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				animation: textclip 1.5s linear infinite;
+				/*display: inline-block;*/
+				position: absolute;
+				/*left: 0;*/
+				/*right: 0;*/
+			}
+
+			@keyframes textclip {
+				to {
+					background-position: 200% center;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="FullPage">
+			<div id="LeftSide">
+				<div style="display: inline-block">
+					<div id="Circle"></div>
+					<div class="username2">{{username}}</div>
+				</div>
+
+				<div class="sidebar">
+					<a class="active" href="#home">Dashboard</a>
+					<a href="{{ url_for('news', top='World') }}">News</a>
+					<a href="{{url_for('textToSpeech')}}">Text-To-Speech</a>
+					<a href="#about">About</a>
+				</div>
+				<div id="bottomLogout"></div>
+			</div>
+
+			<div id="TopPanel">
+				<!-- 			<div class="wrapper">
+				<h1>HI, I'm Violet</h1>
+			</div> -->
+				<div id="timeContainer">
+					<h1 class="time" id="time"></h1>
+					<h1 class="time" id="time2"></h1>
+				</div>
+			</div>
+			<div id="LogoContainer">
+				<a href="https://www.google.com/"><div id="google"></div></a>
+				<a href="https://www.youtube.com/"><div id="youtube"></div></a>
+				<a href="https://www.reddit.com/"><div id="reddit"></div></a>
+				<a href="https://www.instagram.com/"><div id="instagram"></div></a>
+			</div>
+			<div id="LogoContainer2">
+				<a href="https://www.twitter.com/"><div id="twitter"></div></a>
+				<a href="https://www.github.com/"><div id="github"></div></a>
+				<a href="https://www.linkedin.com/"><div id="linkedin"></div></a>
+				<a href="https://www.discord.com/"><div id="discord"></div></a>
+			</div>
+			<!-- 	<div id="RightPanel">
+
+	</div> -->
+		</div>
+		<script type="text/javascript">
+			let timeDisplay = document.getElementById("time");
+			let timeDisplay2 = document.getElementById("time2");
+			function updateClock() {
+				var now = new Date();
+
+				let options = {
+					weekday: "long",
+					year: "numeric",
+					month: "short",
+					day: "numeric",
+				};
+				let options2 = {
+					hour: "2-digit",
+					minute: "2-digit",
+				};
+				timeDisplay.innerHTML = now.toDateString("en-us", options);
+				timeDisplay2.innerHTML = now.toLocaleTimeString("en-us", options2);
+				setTimeout(updateClock, 1000);
+			}
+
+			updateClock();
+		</script>
+	</body>
 </html>

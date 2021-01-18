@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+	<title>Virtual Assistant - Log In</title>
+	<link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+	<div class="loginbox">
+		<div class="button-box">
+			<div id="btn"></div>
+			<button type="button" class="toggle-btn" onclick="login()">Log In</button>
+			<button type="button" class="toggle-btn" onclick="register()">Register</button>
+		</div>
+		<div id="photo">
+			<img class="photo" src="../static/admin.jpg" alt="user">
+		</div>
+		<form id="login" method="POST" class="input-group">
+			<input type="hidden" name="CheckLogReg" value="login">
+				{% if data == "fail" %}
+					 <div style="font-size: small; text-align: center;">Incorrect Password</div>
+				{% endif %}
+			<input type="text" class="input-field" name="LoginUserName" placeholder="Username" required>
+			<input type="password" class="input-field" name="LoginPassword" placeholder="Password" required>
+			<!-- <input type="checkbox" class="check-box"><span>Remember me</span> -->
+			<button type="submit" class="submit-btn" style="margin-top: 5vh;">Log In</button>
+		</form>
+		<form id="register" method="POST" class="input-group">
+			<input type="hidden" name="CheckLogReg" value="register" required>
+			<input type="text" class="input-field" placeholder="Username" name="RegisterUserName" required>
+			<input type="password" class="input-field" placeholder="Password" name="RegisterPassword" required>
+			<!-- <input type="checkbox" class="check-box"><span>I agree to the terms and conditions</span> -->
+			<button type="submit" class="submit-btn" style="margin-top: 5vh;">Register</button>
+		</form>
+
+		
+	</div>
+
+	<script>
+	var x = document.getElementById("login");
+	var y = document.getElementById("register");
+	var z = document.getElementById("btn");
+
+	function register(){
+		x.style.left = "-400px";
+		y.style.left = "50px";
+		z.style.left = "110px";
+	}
+
+	function login(){
+		x.style.left = "50px";
+		y.style.left = "450px";
+		z.style.left = "0";
+	}
+	</script>
+
+</body>
+
+</html>

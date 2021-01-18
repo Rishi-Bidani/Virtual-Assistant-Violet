@@ -1,0 +1,43 @@
+.sidebar {
+	margin-left: 5vw;
+	padding: 0;
+	width: 15vw;
+	background-color: #393861;
+	position: absolute;
+	top: 20%;
+	text-align: center;
+	overflow: auto;
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+}
+
+.sidebar a {
+	display: block;
+	color: white;
+	padding: 16px;
+	font-size: 20px;
+	text-decoration: none;
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+}
+
+.sidebar a.active {
+	background-color: #232545;
+	color: white;
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+}
+
+.sidebar a:hover:not(.active) {
+	background-color: #696780;
+	color: white;
+}
+
+.username2 {
+	color: #c3a87a;
+	display: inline-block;
+	position: absolute;
+	top: 5%;
+	left: 8%;
+	text-transform: uppercase;
+}
