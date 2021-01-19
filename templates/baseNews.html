@@ -7,6 +7,7 @@
 			* {
 				margin: 0;
 				padding: 0;
+				/* font-family: "Courier New", Courier, monospace; */
 			}
 			body {
 				background-color: #232545;
@@ -56,13 +57,33 @@
 
 			#MyJumbotron {
 				width: 75vw;
-				position: absolute;
+				/* position: absolute; */
 				height: 40vh;
 				border-radius: 3vh;
-				background-color: white;
+				background-color: #393861;
+				background: url({{topNews[0]}}),
+					linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)) no-repeat;
 				background-size: 100% 100%;
 				position: relative;
 				top: 7vh;
+				background-blend-mode: overlay;
+			}
+			#topHeading {
+				color: white;
+				position: absolute;
+				left: 2%;
+				bottom: 30%;
+				/* vertical-align: middle; */
+			}
+			#topSumm {
+				color: white;
+				position: absolute;
+				left: 2%;
+				bottom: 20%;
+				font-weight: normal;
+			}
+			a {
+				text-decoration: none;
 			}
 		</style>
 		{% block style %} {% endblock %}
@@ -83,7 +104,12 @@
 				</div>
 				<div id="Middle">
 					<center>
-						<div id="MyJumbotron"></div>
+						<div id="MyJumbotron">
+							<a href="https://www.bbc.com/news/world"
+								><h1 id="topHeading">{{topNews[1][:70]}}</h1></a
+							>
+							<h4 id="topSumm">{{topNews[2][:150] + "..."}}</h4>
+						</div>
 					</center>
 
 					<nav>
@@ -95,6 +121,7 @@
 				</div>
 			</div>
 		</div>
+		{% block body %} {% endblock %}
 		<script type="text/javascript"></script>
 	</body>
 </html>
