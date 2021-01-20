@@ -20,7 +20,7 @@
 		margin-left: 5%;
 		border-bottom: solid white 1px;
 		/* background-color: yellow; */
-		min-width: 56vw;
+		min-width: 46vw;
 		max-width: fit-content;
 		flex-wrap: nowrap;
 		margin-bottom: 2%;
@@ -87,6 +87,19 @@
 		margin-top: 2.5vh;
 		border-radius: 25%;
 	}
+	/* .linksHighlight::after{
+		content:'';
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		width: 0;
+		height: 0;
+		border-top: solid 1vh #e15915;
+		border-left: solid 1vh transparent;
+		border-right: solid 1vh transparent;
+	} */
 </style>
 {% endblock %}
 <!--Comment-->
@@ -95,7 +108,7 @@
 <div id="topicContainer">
 	{% for item in data2 %}
 	<div id="linkContainer">
-		<a id="link" href="{{ url_for('news', top=item) }}">
+		<a id="link" class="linksHighlight" href="{{ url_for('news', top=item) }}">
 			<div id="topic" style="color: white">{{item}}</div>
 		</a>
 	</div>
@@ -139,5 +152,7 @@
 </div>
 <!--  -->
 {% block body %}
+<script>
 
+</script>
 {% endblock %}

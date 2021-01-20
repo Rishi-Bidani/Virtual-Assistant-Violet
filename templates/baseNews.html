@@ -85,6 +85,15 @@
 			a {
 				text-decoration: none;
 			}
+			#timePanel {
+				color: white;
+				position: absolute;
+				right: 0;
+				top: 0;
+				font-size: x-large;
+				margin-right: 3vw;
+				margin-top: 1vh;
+			}
 		</style>
 		{% block style %} {% endblock %}
 	</head>
@@ -102,7 +111,10 @@
 					<a href="{{url_for('textToSpeech')}}">Text-To-Speech</a>
 					<a href="#about">About</a>
 				</div>
+
 				<div id="Middle">
+					<div id="timePanel">Hi</div>
+
 					<center>
 						<div id="MyJumbotron">
 							<a href="https://www.bbc.com/news/world"
@@ -122,6 +134,30 @@
 			</div>
 		</div>
 		{% block body %} {% endblock %}
-		<script type="text/javascript"></script>
+		<script type="text/javascript">
+			let timeDisplay = document.getElementById("timePanel");
+			function updateClock() {
+				var now = new Date();
+
+				let options = {
+					weekday: "long",
+					year: "null",
+					// month: "short",
+					// day: "numeric",
+				};
+				let options2 = {
+					hour: "2-digit",
+					minute: "2-digit",
+				};
+				timeDisplay.innerHTML =
+					now.toDateString("en-us", options).slice(0, 3) +
+					" | " +
+					now.toLocaleTimeString("en-us", options2);
+				// timeDisplay2.innerHTML = now.toLocaleTimeString("en-us", options2);
+				setTimeout(updateClock, 1000);
+			}
+
+			updateClock();
+		</script>
 	</body>
 </html>

@@ -3,10 +3,20 @@
 	<head>
 		<title>Main Page</title>
 		<link rel="stylesheet" type="text/css" href="../static/sideNav.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 		<style type="text/css">
 			* {
 				margin: 0;
 				padding: 0;
+			}
+			:root {
+				--second: #393861;
+				--yellowish: #c3a87a;
 			}
 			body {
 				background-color: #232545;
@@ -53,18 +63,20 @@
 				height: 40vh;
 			}
 			#RightPanel {
-				height: 80vh;
-				width: 28vw;
+				height: 45vh;
+				width: 29vw;
 				background-color: #393861;
+				border-radius: 5%;
 				grid-column: 3;
-				margin-right: 0;
-				margin-top: auto;
-				margin-bottom: auto;
+				margin-right: 1vw;
+				margin-top: 50vh;
+				position: relative;
+				overflow-wrap: break-word;
 			}
 
 			.time {
 				color: white;
-				font-size: 50px;
+				font-size: 7vh;
 			}
 
 			#Circle {
@@ -86,8 +98,23 @@
 
 			#timeContainer {
 				position: relative;
-				top: 50%;
+				top: 30%;
 				left: 2%;
+			}
+			#quoteContainer {
+				position: relative;
+				top: 20%;
+				left: 2%;
+				width: 50vw;
+				text-align: justify;
+			}
+			#quote-author {
+				color: var(--yellowish);
+				font-size: 2vh;
+			}
+			#quote-text {
+				font-size: 3vh;
+				color: white;
 			}
 			#google {
 				background: url("../static/logos/google.png") no-repeat;
@@ -214,12 +241,12 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body onload="loadTasks()">
 		<div id="FullPage">
 			<div id="LeftSide">
 				<div style="display: inline-block">
 					<div id="Circle"></div>
-					<div class="username2">{{username}}</div>
+					<div class="username2" id="loggedInUser">{{username}}</div>
 				</div>
 
 				<div class="sidebar">
@@ -228,7 +255,21 @@
 					<a href="{{url_for('textToSpeech')}}">Text-To-Speech</a>
 					<a href="#about">About</a>
 				</div>
-				<div id="bottomLogout"></div>
+				<div id="bottomLogout">
+					<a
+						href="#"
+						style="
+							position: absolute;
+							color: white;
+							font-size: 1.25em;
+							text-decoration: none;
+							margin-left: 13vw;
+							top: 90%;
+						"
+					>
+						Logout
+					</a>
+				</div>
 			</div>
 
 			<div id="TopPanel">
@@ -238,6 +279,12 @@
 				<div id="timeContainer">
 					<h1 class="time" id="time"></h1>
 					<h1 class="time" id="time2"></h1>
+				</div>
+				<br /><br />
+				<div id="quoteContainer">
+					<div id="quote-text"></div>
+					<!-- <br /> -->
+					<div id="quote-author"></div>
 				</div>
 			</div>
 			<div id="LogoContainer">
@@ -252,9 +299,22 @@
 				<a href="https://www.linkedin.com/"><div id="linkedin"></div></a>
 				<a href="https://www.discord.com/"><div id="discord"></div></a>
 			</div>
-			<!-- 	<div id="RightPanel">
-
-	</div> -->
+			<div id="RightPanel">
+				<div id="toDoHeading">Tasks to do</div>
+				<div id="taskArea">
+					<div id="taskTimeArea" class="leftToDoBox">
+						<!-- tasks will be loaded here from local storage -->
+					</div>
+					<div id="taskTitleArea" class="rightToDoBox">
+						<!-- tasks will be loaded here from local storage -->
+					</div>
+				</div>
+				<div id="addTaskArea" style="color: white">
+					<button id="addTaskButton" class="taskButton" onclick="addTaskUI()">
+						Add
+					</button>
+				</div>
+			</div>
 		</div>
 		<script type="text/javascript">
 			let timeDisplay = document.getElementById("time");
@@ -279,5 +339,7 @@
 
 			updateClock();
 		</script>
+		<script src="../static/todo.js"></script>
+		<script src="../static/quotes.js"></script>
 	</body>
 </html>

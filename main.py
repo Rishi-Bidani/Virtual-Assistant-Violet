@@ -17,64 +17,72 @@ BASE_DIR = os.getcwd()
 db_path = f"{BASE_DIR}/static/user.db"
 
 
-def returnStuff(link):  # return image and description
-    result = requests.get(f"{link}")
-    page = result.text
-    soup = BeautifulSoup(page, "html.parser")
-    getMetaImage = soup.find_all(
-        "meta", {"property": "og:image"}, content=True)
-    getMetaDesc = soup.find_all(
-        "meta", {"property": "og:description"}, content=True)
-    linkList = []
-    descList = []
-    for a in getMetaImage:
-        linkList.append(a["content"])
-    for d in getMetaDesc:
-        descList.append(d["content"])
-
-    return (linkList, descList)
-
-
-def addToNews(top):
-    client = gnewsclient.NewsClient(
-        language="english",
-        location="United States",
-        topic=f"{top}",
-        max_results=7,
-    )
-    news_list = client.get_news()
-    for item in news_list:
-        conn = sqlite3.connect(db_path)
-        db = conn.cursor()
-        returnStuffTuple = (returnStuff(item["link"]))
-        summ = "No Summary"
-        img = "No Image"
-        try:
-            summ = "" if returnStuffTuple[1][0] == (
-            ) else returnStuffTuple[1][0]
-            img = "" if returnStuffTuple[0][0] == (
-            ) else returnStuffTuple[0][0]
-
-        except IndexError:
-            pass
-
-        db.execute(
-            "INSERT OR IGNORE INTO news('heading', 'summary', 'link', 'image', 'topic') VALUES(?,?,?,?,?)", (
-                item['title'], summ, item['link'], img, top)
+class News:
+    def runGClient(self, topic):
+        client = gnewsclient.NewsClient(
+            language="english",
+            location="United States",
+            topic=f"{topic}",
+            max_results=10,
         )
-        conn.commit()
-        conn.close()
+        return client.get_news()
+
+    def returnImageandSummary(self, link):
+        image = ""
+        desc = ""
+        result = requests.get("https://www.bbc.com/news")
+        try:
+            result = requests.get(f"{link}", timeout=2)
+        except requests.exceptions.Timeout as e:
+            # Maybe set up for a retry
+            print(e)
+        page = result.text
+
+        soup = BeautifulSoup(page, "html.parser")
+
+        # print(soup)
+
+        getMetaImage = soup.find_all(
+            "meta", {"property": "og:image"}, content=True)
+        getMetaDesc = soup.find_all(
+            "meta", {"property": "og:description"}, content=True)
+
+        for i in getMetaImage:
+            image = i["content"]
+        for d in getMetaDesc:
+            desc = d["content"]
+        print(image)
+        print(desc)
+        print()
+        return (image, desc)
+
+    def addNewsToDatabase(self, topic):
+        news_list = self.runGClient(topic)
+        for item in news_list:
+            conn = sqlite3.connect(db_path)
+            db = conn.cursor()
+            ImageAndDesc = self.returnImageandSummary(item["link"])
+            summ = ImageAndDesc[1]
+            img = ImageAndDesc[0]
+            db.execute(
+                "INSERT OR IGNORE INTO news('heading', 'summary', 'link', 'image', 'topic') VALUES(?,?,?,?,?)", (
+                    item['title'], summ, item['link'], img, topic)
+            )
+            conn.commit()
+            conn.close()
 
 
-topics = ['Top Stories',
-          'World',
-          'Nation',
-          'Business',
-          'Technology',
-          'Entertainment',
-          'Sports',
-          'Science',
-          'Health']
+scrapeNews = News()
+
+topics = [
+    'World',
+    'Nation',
+    'Business',
+    'Technology',
+    'Entertainment',
+    'Sports',
+    'Science',
+    'Health']
 
 
 def getTopNewsBBC():
@@ -129,7 +137,8 @@ def news(top="world"):
     )
     conn.commit()
     conn.close()
-    addToNews(f'{top}')
+    # addToNews(f'{top}')
+    scrapeNews.addNewsToDatabase(f'{top}')
 
     conn = sqlite3.connect(db_path)
     db = conn.cursor()
