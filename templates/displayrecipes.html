@@ -89,9 +89,11 @@
 				width: 60vw;
 				background-color: var(--second);
 				border-radius: 5vh;
+				overflow-y: scroll;
 			}
 			.titleBlock{
 				text-align: center;
+				margin-bottom: 2vh;
 
 			}
 			h2{
@@ -99,9 +101,38 @@
 				color: var(--yellowish);
 				display: contents;
 			}
-			.title{
+			.ingredientstitle{
+				margin-left: 2vw;
+				margin-top: 3vh;
+				margin-bottom: 2vh;
+			}
+			.list{
+				color: white;
+				margin-left: 3vw;
+			}
+			ul li{
+				margin-bottom: 1vh;
+				font-size: 2.5vh;
+				color: var(--yellowish);
+				list-style: none;
+			}
+			ol li{
+				margin-bottom: 2vh;
+				font-size: 2.5vh;
+				color: var(--yellowish);
+				padding-right: 2vh;
+			}
+			ol li::marker {
+    			color: white;
+			}
+			a{
+				text-decoration: none;
+			}
+			h3{
+				font-size: 3vh;
 				margin-left: 2vw;
 				margin-top: 2vh;
+				color: white;
 			}
         </style>
     </head>
@@ -131,18 +162,60 @@
                 </div>
             </div>
             <div id="Middle">
-                <div class="titleBlock">
-                    <h1>
-                        {{data['title']}} -
-                    </h1>
-                    <h2>
-                        By {{data['chef']}}
-                    </h2>
-                </div>
+                <a href="{{data['link']}}">
+                    <div class="titleBlock">
+                        <h1>
+                            {{data['title']}} -
+                        </h1>
+                        <h2>
+                            By {{data['chef']}}
+                        </h2>
+                    </div>
+                </a>
                 <div class="displayBack">
-                	<div class="ingredientstitle">
-                		<h1 class="title">Ingredients</h1>
-                	</div>
+                    <h3>
+                        Preparation Time:
+                        <span style="color: var(--yellowish)">
+                            {{data['preptime']}}
+                        </span>
+                    </h3>
+                    <h3>
+                        Cooking Time:
+                        <span style="color: var(--yellowish)">
+                            {{data['cooktime']}}
+                        </span>
+                    </h3>
+                    <div class="ingredientstitle">
+                        <h1 class="title">
+                            Ingredients
+                        </h1>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            {% for item in data['ingredients'] %}
+                            <li>
+                                <input type="checkbox"/>
+                                <span style="margin-left: 1vw">
+                                    {{item}}
+                                </span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="ingredientstitle">
+                        <h1 class="title">
+                            Procedure
+                        </h1>
+                    </div>
+                    <div class="list" style="margin-left: 4vw; margin-bottom: 2vh;">
+                        <ol>
+                            {% for item in data['procedure'] %}
+                            <li>
+                                {{item}}
+                            </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
                 </div>
                 <!--             	<h1>{{data['chef']}}</h1>
             	<h1>{{data['procedure']}}</h1>
