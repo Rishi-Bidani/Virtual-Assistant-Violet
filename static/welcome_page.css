@@ -15,9 +15,7 @@ html {
 }
 
 #firstPage {
-  background-image: url("../static/welcome_page.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+
   text-align: center;
   overflow: hidden;
 }
@@ -54,13 +52,16 @@ html {
 
 @font-face {
   font-family: 'Avenir';
-  src: url('../static/Font-Reg.otf');
+  src: url('Font-Reg.otf');
   font-style: normal;
   font-weight:50;
 }
 .violetTitle1{
   font-family: 'Avenir';
   font-weight:100;
+  position:relative;
+  top:47%;
+  left:0.35%;
 }
 .violetTitle2{
   font-family: 'Avenir';
@@ -71,6 +72,9 @@ html {
 #violetDesc{
   font-family: 'Avenir';
   font-weight:100;
+  font-size:1vw;
+  position:relative;
+  top:50%;
 }
 
 #getStartedBtn {
@@ -80,7 +84,7 @@ html {
   margin-right: 1.5vw;
   margin-top: 1.5vh;
   background-color: #393861;
-  border: none;
+  border: none  ;
   border-radius: 30px;
   color: white;
   font-size: 1.2vw;
@@ -90,4 +94,19 @@ html {
 #getStartedBtn:hover {
   background-color: #696780;
   cursor: pointer;
+}
+#logo {
+  position: absolute;
+  width:24.6vw;
+  height: 40vh;
+  top:50%;
+  left:50%;
+  transform: TranslateX(-50%) TranslateY(-105%);
+  z-index: 0;
+}
+#background{
+  width:100%;
+  height:100%;
+  position:absolute;
+  z-index: -1;
 }
