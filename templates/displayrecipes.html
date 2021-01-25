@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="../static/sideNav.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/modal.css" rel="stylesheet" type="text/css"/>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+        <title>
+            Recipes
+        </title>
+        <style type="text/css">
+            :root {
+				--second: #393861;
+				--yellowish: #c3a87a;
+				--second2: rgba(57, 56, 97, 0.6);
+			}
+            * {
+				margin: 0;
+				padding: 0;
+			}
+            body {
+				background-color: #232545;
+			}
+            #FullPage {
+				position: fixed;
+				display: grid;
+				grid-template-columns: 20vw 80vw;
+			}
+			#LeftSide {
+				height: 100vh;
+				width: 20vw;
+				background-color: #393861;
+				margin: 0;
+				padding: 0;
+				grid-column: 1;
+			}
+
+			#Circle {
+				background-color: white;
+				height: 8vh;
+				width: 8vh;
+				position: absolute;
+				top: 2%;
+				left: 2%;
+				border-radius: 50%;
+			}
+			#Middle{
+				position: absolute;
+				grid-column: 2;
+				width: 80vw;
+				height: 100vh;
+				overflow-y: scroll;
+			}
+			.heading{
+				/*position: relative;	*/
+				color: white;
+				margin-left: 30vw;
+				margin-top: 2vh;
+				font-size: 7vh;
+			}
+
+			h1{
+				color: white;
+				margin-left: auto;
+				margin-right: auto;
+				width: 30vw;
+				font-size: 5vh;
+				margin-bottom: 1vh;
+				display: contents;
+			}
+			@media screen and (max-width: 700px) {
+			  h1 {
+			    font-size: 3vw;
+			    margin-top: 1vw;
+			  	/*margin-left: 3vw;*/
+			  	margin-bottom: 1vh;
+			  	display: contents;
+			  }
+			  h2{
+			  	font-size: 2vh;
+			  }
+			}
+
+			a{
+				text-decoration: none;
+			}
+			.displayBack{
+				margin: auto;
+				height: 90vh;
+				width: 60vw;
+				background-color: var(--second);
+				border-radius: 5vh;
+			}
+			.titleBlock{
+				text-align: center;
+
+			}
+			h2{
+				font-size: 3vh;
+				color: var(--yellowish);
+				display: contents;
+			}
+        </style>
+    </head>
+    <body>
+        <div id="FullPage">
+            <div id="LeftSide">
+                <div style="display: inline-block">
+                    <div id="Circle">
+                    </div>
+                    <div class="username2" id="loggedInUser">
+                        {{username}}
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <a href="{{url_for('home')}}">
+                        Dashboard
+                    </a>
+                    <a href="{{ url_for('news', top='World') }}">
+                        News
+                    </a>
+                    <a href="{{url_for('textToSpeech')}}">
+                        Text-To-Speech
+                    </a>
+                    <a class="active" href="#recipes">
+                        Recipes
+                    </a>
+                </div>
+            </div>
+            <div id="Middle">
+                <div class="titleBlock">
+                    <h1>
+                        {{data['title']}} -
+                    </h1>
+                    <h2>
+                        By {{data['chef']}}
+                    </h2>
+                </div>
+                <div class="displayBack">
+                </div>
+                <!--             	<h1>{{data['chef']}}</h1>
+            	<h1>{{data['procedure']}}</h1>
+            	<h1>{{data['ingredients']}}</h1>
+            	<h1>{{data['preptime']}}</h1>
+            	<h1>{{data['cooktime']}}</h1>
+            	<h1>{{data['servings']}}</h1> -->
+            </div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+</script>

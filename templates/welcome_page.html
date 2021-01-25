@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome to Violet</title>
+    <link rel="stylesheet" type="text/css" href="../static/welcome_page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+      #mainHeading {
+        margin-top: 20vh;
+      }
+      #featureIcon {
+        font-size: 10vh;
+        width: 8vw;
+        height: 5vh;
+        position: relative;
+        margin-top: 5vh;
+      }
+      .leftFeature {
+        width: 48vw;
+        height: 33vh;
+        float: left;
+        margin-top: 0;
+        text-align: center;
+      }
+      .rightFeature {
+        width: 48vw;
+        height: 33vh;
+        float:right;
+        margin-top: 0;
+        text-align: center;
+      }
+      #featureTitle {
+        font-size: 3vh;
+        font-weight: bold;
+        font-family:'Avenir';
+      }
+      .featureDesc {
+        font-size: 1.8vh;
+        font-family:'Avenir';
+      }
+      h2 {
+        font-size: 3.1vh;
+      }
+      h1 {
+        font-size: 5.9vh;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="firstPage">
+      <a href="{{url_for('login')}}"><button id="getStartedBtn"> Get Started </button></a>
+      <div id="headingArea">
+        <h1 class="violetTitle1">V<span class="violetTitle2"> i o l e t</span></h1>
+        <h2 id="violetDesc">Most people have more work to do than they can manage. I have been specially designed for <br> you to manage your time effectively and hassle free.</h2>
+      </div>
+      <div id="bottomArea">
+        Scroll down to see what I can do for you<br>
+        <a href="#secondPage"><i class="fa fa-angle-down" id="scrollDownIcon"></i></a>
+      </div>
+    </div>
+    <div id="secondPage">
+      <div class="leftFeature" id="toDoListDesc">
+        <i class="fa fa-list-alt" id="featureIcon"></i><br><br><br><span id="featureTitle">To-do List</span>
+        <br><br><span class=featureDesc>Make an organised and scheduled list of your day to day tasks easily</span>
+      </div>
+      <div class="rightFeature" id="newsDesc">
+        <i class="fa fa-file" id="featureIcon"></i><br><br><br><span id="featureTitle">Latest News</span>
+        <br><br><span class=featureDesc>Keep yourself updated with the current happenings around the world</span>
+      </div>
+      <div class="leftFeature" id="linkDesc">
+        <i class="fa fa-link" id="featureIcon"></i><br><br><br><span id="featureTitle">Stay connected</span>
+        <br><br><span class=featureDesc>A click away access to the most frequently used sites by users</span>
+      </div>
+      <div class="rightFeature" id="textToSpeechDesc">
+        <i class="fa fa-comments" id="featureIcon"></i><br><br><br><span id="featureTitle">Text to Speech</span>
+        <br><br><span class=featureDesc>Let us assist you by the digitally read-aloud feature and to edit your writing quickly </span>
+      </div>
+      <div class="leftFeature" id="recipeDesc">
+        <i class="fa fa-fire" id="featureIcon"></i><br><br><br><span id="featureTitle">View Recipes</span>
+        <br><br><span class=featureDesc>Get recipes within seconds when you are hungry</span>
+      </div>
+      <div class="rightFeature" id="moreDesc">
+        <br><br><br><br><br><br><span id="featureTitle">More features coming soon...</span>
+      </div>
+    </div>
+  </body>
+</html>

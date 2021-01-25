@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, flash, url_for, session
+from flask import Flask, render_template, redirect, request, flash, url_for, session, send_from_directory
 from flask_cors import CORS
 import os
 import os.path
@@ -9,6 +9,10 @@ import sqlite3
 
 import requests
 from bs4 import BeautifulSoup
+
+from recipe_scraper import RecipeModule, Dish
+from getRecipes import getSearchResults, getRecipeDetails
+import json
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecretkey_is_safe"
@@ -116,6 +120,12 @@ def getTopNewsBBC():
 
 
 @app.route("/")
+def homeScreen():
+    if "user" in session:
+        return render_template("home.html", username=session["user"])
+    else:
+        return render_template("welcome_page.html")
+
 @app.route("/home")
 def home():
     if "user" in session:
@@ -226,5 +236,54 @@ def login():
     return render_template("login.html")
 
 
+@app.route('/recipes', methods=["GET", "POST"])
+def recipes():
+    # dish_names = []
+    if "user" in session:
+        data = {'titles': [], 'prepTime': [],
+                'cookTime': [], 'servings': [], 'links': []}
+        if request.method == "POST" and request.form.get("searching") == "search":
+            recipename = request.form.get("recipe_search")
+            print(recipename)
+            # module = RecipeModule(recipename)
+            module = getSearchResults(recipename)
+            dish_names = module.returnTitles()
+            prepTime, cookTime, servings = module.returnTitleDetails()
+            links = module.returnLinks()
+
+            data = {'titles': dish_names, 'prepTime': prepTime,
+                    'cookTime': cookTime, 'servings': servings, 'links': links}
+            # for links in data['links']:
+
+        else:
+            print("didnt work")
+        return render_template("recipes.html", username=session["user"], data=data)
+
+    else:
+        return redirect(url_for("login"))
+
+
+@app.route("/recipes/<name>")
+def displayRecipe(name):
+    print("print link: ", name)
+    data = {}
+
+    module = getSearchResults(name)
+    links = module.returnLinks()[:1]
+    module2 = getRecipeDetails(links[0])
+    data['title'] = name
+    data['link'] = links[0]
+    data['procedure'] = module2.returnProcedure()
+    data['ingredients'] = module2.returnIngredients()
+    data['chef'] = module2.returnChef()
+    data['servings'] = module2.returnServings()
+    data['preptime'] = module2.returnPrepTime()
+    data['cooktime'] = module2.returnCookingTime()
+    return render_template("displayrecipes.html", data=data, username=session["user"])
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                          'favicon.ico')
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

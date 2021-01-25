@@ -253,11 +253,11 @@
 					<a class="active" href="#home">Dashboard</a>
 					<a href="{{ url_for('news', top='World') }}">News</a>
 					<a href="{{url_for('textToSpeech')}}">Text-To-Speech</a>
-					<a href="#about">About</a>
+					<a href="{{url_for('recipes')}}">Recipes</a>
 				</div>
 				<div id="bottomLogout">
 					<a
-						href="#"
+						href="{{url_for('login')}}"
 						style="
 							position: absolute;
 							color: white;

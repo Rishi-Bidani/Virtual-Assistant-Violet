@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="../static/sideNav.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/modal.css" rel="stylesheet" type="text/css"/>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+        <title>
+            Recipes
+        </title>
+        <style type="text/css">
+            :root {
+				--second: #393861;
+				--yellowish: #c3a87a;
+				--second2: rgba(57, 56, 97, 0.6);
+			}
+            * {
+				margin: 0;
+				padding: 0;
+			}
+            body {
+				background-color: #232545;
+			}
+            #FullPage {
+				position: fixed;
+				display: grid;
+				grid-template-columns: 20vw 80vw;
+			}
+			#LeftSide {
+				height: 100vh;
+				width: 20vw;
+				background-color: #393861;
+				margin: 0;
+				padding: 0;
+				grid-column: 1;
+			}
+
+			#Circle {
+				background-color: white;
+				height: 8vh;
+				width: 8vh;
+				position: absolute;
+				top: 2%;
+				left: 2%;
+				border-radius: 50%;
+			}
+			#Middle{
+				position: absolute;
+				grid-column: 2;
+				width: 80vw;
+				height: 100vh;
+			}
+			.heading{
+				/*position: relative;	*/
+				color: white;
+				margin-left: 30vw;
+				margin-top: 2vh;
+				font-size: 7vh;
+
+			}
+			input[type="text"]{
+				width: 40vw;
+				height: 5vh;
+				padding-left: 1vw;
+				border-radius: 2vh;
+				background-color: var(--second);
+				outline: none;
+				border-style: hidden;
+				color: white;
+			}
+			#SearchForRecipe{
+				margin-left: 20vw;
+				margin-top: 5vh;
+				margin-bottom: 5vh
+			}
+			#SearchForRecipe:focus{
+				outline: none;
+				color: white;
+			}
+			#DisplayRecipes{
+				width: 70vw;
+				height: 20vh;
+				/*margin-left: 2.5vw;*/
+				color: white;
+				border-radius: 5vh;
+				margin-top: 4vh;
+				margin-bottom: 6vh;
+				background-color: var(--second2);
+				/*z-index: 20*/
+				display: inline-flex;				
+			}
+			#DisplayRecipes:hover{
+				background-color: var(--second);
+				z-index: 0;
+			}
+			#RecipeScrollContainer{
+				overflow: scroll;
+				width: 70vw;
+				height: 80vh;
+				/*background-color: white;*/
+				margin-left: 5vw;
+				text-align: left;
+				/*padding-bottom: 10vh;*/
+			}
+			h1{
+				color: var(--yellowish);
+				margin-left: 2vw;
+				width: 30vw;
+				font-size: 4vh;
+			}
+			@media screen and (max-width: 700px) {
+			  h1 {
+			    font-size: 3vw;
+			    margin-top: 1vw;
+			  	margin-left: 3vw;
+			  }
+			}
+			.alignRight{
+			    position: relative;
+			    align-self: flex-end;
+			    font-size: 3vh;
+			    flex: none;
+			    margin-bottom: 5vh;
+			    margin-left: 20vw;
+			}
+			a{
+				text-decoration: none;
+			}
+			#formlink{
+				display: none;
+			}
+        </style>
+    </head>
+    <body>
+        <div id="FullPage">
+            <div id="LeftSide">
+                <div style="display: inline-block">
+                    <div id="Circle">
+                    </div>
+                    <div class="username2" id="loggedInUser">
+                        {{username}}
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <a href="{{url_for('home')}}">
+                        Dashboard
+                    </a>
+                    <a href="{{ url_for('news', top='World') }}">
+                        News
+                    </a>
+                    <a href="{{url_for('textToSpeech')}}">
+                        Text-To-Speech
+                    </a>
+                    <a class="active" href="#recipes">
+                        Recipes
+                    </a>
+                </div>
+
+            </div>
+            <div id="Middle">
+                <h1 class="heading">
+                    Search Recipe
+                </h1>
+                <form method="post">
+                    <input hidden="" name="searching" type="text" value="search">
+                        <input id="SearchForRecipe" name="recipe_search" placeholder="Search Recipe" type="text">
+                            <button hidden="" id="RecipeSearchSubmit" name="sub" type="submit">
+                            </button>
+                        </input>
+                    </input>
+                </form>
+                <div id="RecipeScrollContainer">
+                    {% for i in range(data['titles']|length) %}
+                    <!-- console.log({{data['links'][i]}}) -->
+                    <a href="{{ url_for('displayRecipe', name= data['titles'][i]  )}}" id="link{{i}}" 
+                    onclick="getdata(this.id)">
+                        <div id="DisplayRecipes{{i}}">
+                            <div id="DisplayRecipes">
+                                <h1>
+                                    {{data['titles'][i][:70]}}
+                                </h1>
+                                <h4 class="alignRight">
+                                    {{data['servings'][i]}}
+                                    <br>
+                                        {{data['cookTime'][i]}}
+                                    </br>
+                                </h4>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="myModal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">
+                        ×
+                    </span>
+                    <h2 id="modalHeading">
+                        Modal Header
+                    </h2>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Some text in the Modal Body
+                    </p>
+                    <p>
+                        Some other text...
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <h3>
+                        Modal Footer
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">
+    function getdata(id){
+		let numberId = id.slice(-1);
+		let sendlinkform = document.getElementById("sendlink"+`${numberId}`);
+		let heading = document.getElementById("modalHeading");
+		let data = {{ data|tojson }};
+		// console.log(data.titles[numberId]);
+		heading.innerHTML = data.titles[numberId];
+	}
+
+    let recipeSearch = document.getElementById("SearchForRecipe")
+    let submitRecipe = document.getElementById("RecipeSearchSubmit")
+    recipeSearch.addEventListener("keydown", event => {
+        if (event.keyCode === 13) {
+        			submitRecipe.submit()
+        		}
+        	})
+    function executeModal(id){
+	    // Get the modal
+    
+    let numberId = id.slice(-1)
+	var modal = document.getElementById("myModal");
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("DisplayRecipes"+`${numberId}`);
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+	  }
+	}}
+</script>

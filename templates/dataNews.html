@@ -2,7 +2,7 @@
 <!--Comment-->
 {% block style %}
 <style>
-	:root {
+    :root {
 		--second: #393861;
 		--yellowish: #C3A87A;
 	}
@@ -87,72 +87,66 @@
 		margin-top: 2.5vh;
 		border-radius: 25%;
 	}
-	/* .linksHighlight::after{
-		content:'';
-		position: absolute;
-		top: 100%;
-		left: 0;
-		right: 0;
-		margin: 0 auto;
-		width: 0;
-		height: 0;
-		border-top: solid 1vh #e15915;
-		border-left: solid 1vh transparent;
-		border-right: solid 1vh transparent;
-	} */
+
 </style>
 {% endblock %}
 <!--Comment-->
 {% block topics %}
 <!--topics-->
 <div id="topicContainer">
-	{% for item in data2 %}
-	<div id="linkContainer">
-		<a id="link" class="linksHighlight" href="{{ url_for('news', top=item) }}">
-			<div id="topic" style="color: white">{{item}}</div>
-		</a>
-	</div>
-
-	{% endfor %}
+    {% for item in data2 %}
+    <div id="linkContainer">
+        <a class="linksHighlight" href="{{ url_for('news', top=item) }}" id="link">
+            <div id="topic" style="color: white">
+                {{item}}
+            </div>
+        </a>
+    </div>
+    {% endfor %}
 </div>
 <!-- actual news -->
 {% endblock %}
 <div>
-	<!-- actual news -->
-	{% block actualNews %}
-
-	<div id="n">
-		{% for key, value in data.items() %}
-		<table>
-			<tr id="spaceHere">
-				<!-- <td rowspan="2"><div id="news"></div></td> -->
-				<td rowspan="2"><div id="news"><img src="{{value[1]}}" alt="No-Image"></div></td>
-				<td></td>
-			</tr>
-			<tr>
-				<!-- <td></td> -->
-				<td>
-					<!-- <br> -->
-					<div id="SummaryContainer">
-					<div id="heading"><a href="{{value[2]}}">{{key}}</a></div>
-						<br>
-						{{value[0]}}
-					</div>
-				</td>
-
-			</tr>
-
-		</div>
-		{% endfor %}
-	</table>
-
-	<!-- end for -->
-	{% endblock %}
-	<!-- endactual news -->
+    <!-- actual news -->
+    {% block actualNews %}
+    <div id="n">
+        {% for key, value in data.items() %}
+        <table>
+            <tr id="spaceHere">
+                <!-- <td rowspan="2"><div id="news"></div></td> -->
+                <td rowspan="2">
+                    <div id="news">
+                        <img alt="No-Image" src="{{value[1]}}"/>
+                    </div>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <!-- <td></td> -->
+                <td>
+                    <!-- <br> -->
+                    <div id="SummaryContainer">
+                        <div id="heading">
+                            <a href="{{value[2]}}">
+                                {{key}}
+                            </a>
+                        </div>
+                        <br>
+                            {{value[0]}}
+                        </br>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        {% endfor %}
+    </div>
 </div>
-<!--  -->
+<!-- end for -->
+{% endblock %}
+<!-- endactual news -->
+<!-- -->
 {% block body %}
 <script>
-
 </script>
 {% endblock %}

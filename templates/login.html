@@ -3,54 +3,89 @@
 	<title>Virtual Assistant - Log In</title>
 	<link rel="stylesheet" href="../static/style.css">
 </head>
-
+<style type="text/css">
+	#loginOption {
+		background:#FFFFFF;
+		color:black;
+		font-weight:900;
+		font-size: 1.2em;
+	}
+	#registerOption {
+		border-top-right-radius:10px;
+		border-bottom-left-radius:10px;
+	}
+	#incorrpass{
+		margin-top: 1vh;
+		font-size: small;
+		text-align: center;
+	}
+</style>
 <body>
 	<div class="loginbox">
 		<div class="button-box">
 			<div id="btn"></div>
-			<button type="button" class="toggle-btn" onclick="login()">Log In</button>
-			<button type="button" class="toggle-btn" onclick="register()">Register</button>
-		</div>
+			<button type="button" class="toggle-btn" id="loginOption" onclick="login()">Log In</button>
+			<button type="button" class="toggle-btn" id="registerOption" onclick="register()">Register</button>
+		</div><br><br>
 		<div id="photo">
 			<img class="photo" src="../static/admin.jpg" alt="user">
 		</div>
 		<form id="login" method="POST" class="input-group">
+			<br>
 			<input type="hidden" name="CheckLogReg" value="login">
 				{% if data == "fail" %}
-					 <div style="font-size: small; text-align: center;">Incorrect Password</div>
+					 <div id="incorrpass">Incorrect Password</div>
 				{% endif %}
+			<br>
 			<input type="text" class="input-field" name="LoginUserName" placeholder="Username" required>
 			<input type="password" class="input-field" name="LoginPassword" placeholder="Password" required>
 			<!-- <input type="checkbox" class="check-box"><span>Remember me</span> -->
-			<button type="submit" class="submit-btn" style="margin-top: 5vh;">Log In</button>
+			<button type="submit" class="submit-btn" style="margin-top: 1vh;">Log In</button>
 		</form>
 		<form id="register" method="POST" class="input-group">
+			<br>
 			<input type="hidden" name="CheckLogReg" value="register" required>
+			<br>
 			<input type="text" class="input-field" placeholder="Username" name="RegisterUserName" required>
 			<input type="password" class="input-field" placeholder="Password" name="RegisterPassword" required>
 			<!-- <input type="checkbox" class="check-box"><span>I agree to the terms and conditions</span> -->
-			<button type="submit" class="submit-btn" style="margin-top: 5vh;">Register</button>
+			<button type="submit" class="submit-btn" style="margin-top: 4vh;">Register</button>
 		</form>
 
-		
+
 	</div>
-
 	<script>
-	var x = document.getElementById("login");
-	var y = document.getElementById("register");
-	var z = document.getElementById("btn");
-
-	function register(){
-		x.style.left = "-400px";
-		y.style.left = "50px";
-		z.style.left = "110px";
-	}
+	let loginButton = document.getElementById("loginOption");
+	let registerButton = document.getElementById("registerOption");
+	let x = document.getElementById('login');
+	let y = document.getElementById('register');
 
 	function login(){
+		loginButton.style.background = "#FFFFFF";
+		loginButton.style.color = "black";
+		loginButton.style.fontWeight = "900";
+		loginButton.style.fontSize = "1.2em";
+		registerButton.style.background = "#393861";
+		registerButton.style.color = "#FFFFFF";
+		registerButton.style.fontWeight = "normal";
+		registerButton.style.fontSize = "1em";
 		x.style.left = "50px";
 		y.style.left = "450px";
-		z.style.left = "0";
 	}
+
+	function register(){
+		registerButton.style.background = "#FFFFFF";
+		registerButton.style.color = "black";
+		registerButton.style.fontWeight = "900";
+		registerButton.style.fontSize = "1.2em";
+		loginButton.style.background = "#393861";
+		loginButton.style.color = "#FFFFFF";
+		loginButton.style.fontWeight = "normal";
+		loginButton.style.fontSize = "1em";
+		x.style.left = "-400px";
+		y.style.left = "50px";
+	}
+
 	</script>
 
 </body>

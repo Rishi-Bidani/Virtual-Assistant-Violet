@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#firstPage {
+  background-image: url("../static/welcome_page.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  overflow: hidden;
+}
+
+#secondPage {
+  background-color: #393861;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+#headingArea {
+  text-align: center;
+  width: 100vw;
+  height: 10vh;
+  margin-top: 39vh;
+}
+
+#bottomArea {
+  display: block;
+  position: absolute;
+  top: 87vh;
+  text-align: center;
+  height: 15vh;
+  width: 100vw;
+  font-size: 2.4vh;
+  font-family:'Avenir';
+}
+
+#scrollDownIcon {
+  font-size: 7vh;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('../static/Font-Reg.otf');
+  font-style: normal;
+  font-weight:50;
+}
+.violetTitle1{
+  font-family: 'Avenir';
+  font-weight:100;
+}
+.violetTitle2{
+  font-family: 'Avenir';
+  font-weight:50;
+  text-transform:  lowercase;
+}
+
+#violetDesc{
+  font-family: 'Avenir';
+  font-weight:100;
+}
+
+#getStartedBtn {
+  width: 12vw;
+  height: 6vh;
+  float: right;
+  margin-right: 1.5vw;
+  margin-top: 1.5vh;
+  background-color: #393861;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 1.2vw;
+  font-family: 'Avenir';
+}
+
+#getStartedBtn:hover {
+  background-color: #696780;
+  cursor: pointer;
+}
