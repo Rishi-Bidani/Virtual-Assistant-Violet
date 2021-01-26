@@ -26,12 +26,12 @@
 			<div id="btn"></div>
 			<button type="button" class="toggle-btn" id="loginOption" onclick="login()">Log In</button>
 			<button type="button" class="toggle-btn" id="registerOption" onclick="register()">Register</button>
-		</div><br><br>
+		</div><br>
 		<div id="photo">
 			<img class="photo" src="../static/admin.jpg" alt="user">
 		</div>
 		<form id="login" method="POST" class="input-group">
-			<br>
+			<!-- <br> -->
 			<input type="hidden" name="CheckLogReg" value="login">
 				{% if data == "fail" %}
 					 <div id="incorrpass">Incorrect Password</div>
@@ -40,10 +40,10 @@
 			<input type="text" class="input-field" name="LoginUserName" placeholder="Username" required>
 			<input type="password" class="input-field" name="LoginPassword" placeholder="Password" required>
 			<!-- <input type="checkbox" class="check-box"><span>Remember me</span> -->
-			<button type="submit" class="submit-btn" style="margin-top: 1vh;">Log In</button>
+			<button type="submit" class="submit-btn" style="margin-top: 4vh;">Log In</button>
 		</form>
 		<form id="register" method="POST" class="input-group">
-			<br>
+			<!-- <br> -->
 			<input type="hidden" name="CheckLogReg" value="register" required>
 			<br>
 			<input type="text" class="input-field" placeholder="Username" name="RegisterUserName" required>
