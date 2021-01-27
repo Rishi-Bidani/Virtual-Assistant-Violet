@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Main Page</title>
-		<link rel="stylesheet" type="text/css" href="../static/sideNav.css" />
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-		/>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-		<style type="text/css">
-			* {
+    <head>
+        <title>
+            Main Page
+        </title>
+        <link href="../static/sideNav.css" rel="stylesheet" type="text/css"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+        </script>
+        <style type="text/css">
+            * {
 				margin: 0;
 				padding: 0;
+				font-family: 'Avenir';
+				font-style: normal;
+  				font-weight:50;
 			}
 			:root {
 				--second: #393861;
@@ -212,7 +214,6 @@
 				/*font-family: "ubuntu";*/
 				text-transform: uppercase;
 				font-weight: 700;
-				font-family: "Avenir", Avenir;
 				background: linear-gradient(
 					to right,
 					#095fab 10%,
@@ -239,85 +240,125 @@
 					background-position: 200% center;
 				}
 			}
-		</style>
-	</head>
-	<body onload="loadTasks()">
-		<div id="FullPage">
-			<div id="LeftSide">
-				<div style="display: inline-block">
-					<div id="Circle"></div>
-					<div class="username2" id="loggedInUser">{{username}}</div>
-				</div>
-
-				<div class="sidebar">
-					<a class="active" href="#home">Dashboard</a>
-					<a href="{{ url_for('news', top='World') }}">News</a>
-					<a href="{{url_for('textToSpeech')}}">Text-To-Speech</a>
-					<a href="{{url_for('recipes')}}">Recipes</a>
-				</div>
-				<div id="bottomLogout">
-					<a
-						href="{{url_for('login')}}"
-						style="
+			a{
+				text-decoration: none;
+			}
+        </style>
+    </head>
+    <body onload="loadTasks()">
+        <div id="FullPage">
+            <div id="LeftSide">
+                <div style="display: inline-block">
+                    <div id="Circle">
+                    </div>
+                    <div class="username2" id="loggedInUser">
+                        {{username}}
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <a class="active" href="#home">
+                        Dashboard
+                    </a>
+                    <a href="{{ url_for('news', top='World') }}">
+                        News
+                    </a>
+                    <a href="{{url_for('textToSpeech')}}">
+                        Text-To-Speech
+                    </a>
+                    <a href="{{url_for('recipes')}}">
+                        Recipes
+                    </a>
+                </div>
+                <div id="bottomLogout">
+                    <a href="{{url_for('login')}}" style="
 							position: absolute;
 							color: white;
 							font-size: 1.25em;
 							text-decoration: none;
 							margin-left: 13vw;
 							top: 90%;
-						"
-					>
-						Logout
-					</a>
-				</div>
-			</div>
-
-			<div id="TopPanel">
-				<!-- 			<div class="wrapper">
+						">
+                        Logout
+                    </a>
+                </div>
+            </div>
+            <div id="TopPanel">
+                <!-- 			<div class="wrapper">
 				<h1>HI, I'm Violet</h1>
 			</div> -->
-				<div id="timeContainer">
-					<h1 class="time" id="time"></h1>
-					<h1 class="time" id="time2"></h1>
-				</div>
-				<br /><br />
-				<div id="quoteContainer">
-					<div id="quote-text"></div>
-					<!-- <br /> -->
-					<div id="quote-author"></div>
-				</div>
-			</div>
-			<div id="LogoContainer">
-				<a href="https://www.google.com/"><div id="google"></div></a>
-				<a href="https://www.youtube.com/"><div id="youtube"></div></a>
-				<a href="https://www.reddit.com/"><div id="reddit"></div></a>
-				<a href="https://www.instagram.com/"><div id="instagram"></div></a>
-			</div>
-			<div id="LogoContainer2">
-				<a href="https://www.twitter.com/"><div id="twitter"></div></a>
-				<a href="https://www.github.com/"><div id="github"></div></a>
-				<a href="https://www.linkedin.com/"><div id="linkedin"></div></a>
-				<a href="https://www.discord.com/"><div id="discord"></div></a>
-			</div>
-			<div id="RightPanel">
-				<div id="toDoHeading">Tasks to do</div>
-				<div id="taskArea">
-					<div id="taskTimeArea" class="leftToDoBox">
-						<!-- tasks will be loaded here from local storage -->
-					</div>
-					<div id="taskTitleArea" class="rightToDoBox">
-						<!-- tasks will be loaded here from local storage -->
-					</div>
-				</div>
-				<div id="addTaskArea" style="color: white">
-					<button id="addTaskButton" class="taskButton" onclick="addTaskUI()">
-						Add
-					</button>
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript">
-			let timeDisplay = document.getElementById("time");
+                <div id="timeContainer">
+                    <h1 class="time" id="time">
+                    </h1>
+                    <h1 class="time" id="time2">
+                    </h1>
+                </div>
+                <br/>
+                <br/>
+                <div id="quoteContainer">
+                    <div id="quote-text">
+                    </div>
+                    <!-- <br /> -->
+                    <div id="quote-author">
+                    </div>
+                </div>
+            </div>
+            <div id="LogoContainer">
+                <a href="https://www.google.com/" target="_blank">
+                    <div id="google">
+                    </div>
+                </a>
+                <a href="https://www.youtube.com/" target="_blank">
+                    <div id="youtube">
+                    </div>
+                </a>
+                <a href="https://www.reddit.com/" target="_blank">
+                    <div id="reddit">
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <div id="instagram">
+                    </div>
+                </a>
+            </div>
+            <div id="LogoContainer2">
+                <a href="https://www.twitter.com/" target="_blank">
+                    <div id="twitter">
+                    </div>
+                </a>
+                <a href="https://www.github.com/" target="_blank">
+                    <div id="github">
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/" target="_blank">
+                    <div id="linkedin">
+                    </div>
+                </a>
+                <a href="https://www.discord.com/" target="_blank">
+                    <div id="discord">
+                    </div>
+                </a>
+            </div>
+            <div id="RightPanel">
+                <div id="toDoHeading">
+                    Tasks to do
+                </div>
+                <div id="taskArea">
+                    <div class="leftToDoBox" id="taskTimeArea">
+                        <!-- tasks will be loaded here from local storage -->
+                    </div>
+                    <div class="rightToDoBox" id="taskTitleArea">
+                        <!-- tasks will be loaded here from local storage -->
+                    </div>
+                </div>
+                <div id="addTaskArea" style="color: white">
+                    <button class="taskButton" id="addTaskButton" onclick="addTaskUI()">
+                        Add
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            let timeDisplay = document.getElementById("time");
 			let timeDisplay2 = document.getElementById("time2");
 			function updateClock() {
 				var now = new Date();
@@ -338,8 +379,10 @@
 			}
 
 			updateClock();
-		</script>
-		<script src="../static/todo.js"></script>
-		<script src="../static/quotes.js"></script>
-	</body>
+        </script>
+        <script src="../static/todo.js">
+        </script>
+        <script src="../static/quotes.js">
+        </script>
+    </body>
 </html>

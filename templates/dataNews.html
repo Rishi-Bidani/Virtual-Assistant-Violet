@@ -11,19 +11,23 @@
 		color: white;
 	}
 	#topicContainer {
-		/* margin-right: 2%; */
-		display: flex;
-		flex-direction: row;
-		position: relative;
-		margin-top: 12vh;
-		/* left: 10%; */
-		margin-left: 5%;
-		border-bottom: solid white 1px;
-		/* background-color: yellow; */
-		min-width: 46vw;
-		max-width: fit-content;
-		flex-wrap: nowrap;
-		margin-bottom: 2%;
+	  display: flex;
+	  flex-direction: row;
+	  position: relative;
+	  margin-top: 12vh;
+	  margin-left: 5%;
+	  border-bottom: solid black 1px;
+      max-width: fit-content;
+	  flex-wrap: nowrap;
+	  margin-bottom: 2%;
+	}	
+	.linkContainer {
+	  position: relative;
+	  width: fit-content;
+	  border-bottom: solid white 1px;
+	  flex-wrap: nowrap;
+	  /* margin-bottom: 2%; */
+	  padding-right: 1vw;
 	}
 	#topicContainer::after {
 		border-bottom: none;
@@ -43,8 +47,8 @@
 		background-size: 15vh 15vh;
 		background-position: center;
 		background-color: var(--second);
-		width: 20vh;
-		height: 20vh;
+		width: 25vh;
+		height: 25vh;
 		border-radius: 25%;
 		margin-left: 2%;
 		margin-right: 2%;
@@ -67,8 +71,7 @@
 	#SummaryContainer {
 		width: 50vw;
 		height: 20vh;
-		/* background-color: red; */
-		margin-bottom: 2%;
+		/*margin-bottom: 4%;*/
 		color: var(--yellowish);
 	}
 	#n {
@@ -81,13 +84,15 @@
 		padding-right: 1vw;
 	}
 	img{
-		width: 15vh;
-		height: 15vh;
+		width: 20vh;
+		height: 20vh;
 		margin-left: 2.5vh;
 		margin-top: 2.5vh;
 		border-radius: 25%;
 	}
-
+	table{
+		margin-bottom: 2vh;
+	}
 </style>
 {% endblock %}
 <!--Comment-->
@@ -95,7 +100,7 @@
 <!--topics-->
 <div id="topicContainer">
     {% for item in data2 %}
-    <div id="linkContainer">
+    <div class="linkContainer">
         <a class="linksHighlight" href="{{ url_for('news', top=item) }}" id="link">
             <div id="topic" style="color: white">
                 {{item}}
@@ -128,7 +133,7 @@
                     <!-- <br> -->
                     <div id="SummaryContainer">
                         <div id="heading">
-                            <a href="{{value[2]}}">
+                            <a href="{{value[2]}}" target="_blank">
                                 {{key}}
                             </a>
                         </div>
