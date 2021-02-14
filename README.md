@@ -6,6 +6,10 @@
 **Violet** |  *A virtual assistant for your daily needs.*
 Link: http://violet1.herokuapp.com/
 
+
+### Caution :heavy_exclamation_mark: | Please register with a unique username.
+
+
 ## Table of Contents :scroll:
 > **1. [Project Description](#description)**\
 > **2. [Accessing Violet](#access)**\
