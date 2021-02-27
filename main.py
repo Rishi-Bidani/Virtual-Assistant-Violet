@@ -10,7 +10,7 @@ import sqlite3
 import requests
 from bs4 import BeautifulSoup
 
-from recipe_scraper import RecipeModule, Dish
+# from recipe_scraper import RecipeModule, Dish ## was used earlier, not required anymore since getRecipes
 from getRecipes import getSearchResults, getRecipeDetails
 import json
 
